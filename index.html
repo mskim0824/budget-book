@@ -4,6 +4,11 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 <meta name="theme-color" content="#4A6FA5" />
+<link rel="manifest" href="./manifest.json" />
+<link rel="apple-touch-icon" href="./icon-192.png" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="default" />
+<meta name="apple-mobile-web-app-title" content="가계부" />
 <title>가계부</title>
 <style>
   :root {
@@ -1207,6 +1212,13 @@ function initCloud() {
 topUpUnlimited();
 render();
 initCloud();
+
+// PWA: 서비스워커 등록 (홈 화면 설치 + 오프라인)
+if ("serviceWorker" in navigator) {
+  window.addEventListener("load", () => {
+    navigator.serviceWorker.register("./sw.js").catch(e => console.warn("서비스워커 등록 실패", e));
+  });
+}
 </script>
 </body>
 </html>
