@@ -334,7 +334,7 @@ const DEFAULT_ASSETS = [
 const LS = { txs:"budget.txs.v1", cats:"budget.cats.v1", assets:"budget.assets.v1", rules:"budget.rules.v1", theme:"budget.theme.v1", seeded:"budget.seeded.v1", catver:"budget.catver", assetver:"budget.assetver" };
 const CAT_VERSION = 3;
 const ASSET_VERSION = 2;
-const DATA_KEYS = new Set([LS.txs, LS.cats, LS.assets, LS.rules]);
+const DATA_KEYS = new Set([LS.txs, LS.cats, LS.assets, LS.rules, LS.theme]);
 
 // ---------- Firebase (동기화) 상태 ----------
 const firebaseConfig = {
@@ -1149,7 +1149,7 @@ function schedulePush() {
 }
 function pushCloud() {
   if (!cloud.user || !fbDb) return;
-  fbDb.collection("users").doc(cloud.user.uid).set({ txs, cats, assets, rules, updatedAt: Date.now() })
+  fbDb.collection("users").doc(cloud.user.uid).set({ txs, cats, assets, rules, theme: loadLS(LS.theme, "light"), updatedAt: Date.now() })
     .catch(e => console.warn("동기화 저장 실패", e));
 }
 function applyRemote(d) {
@@ -1158,6 +1158,7 @@ function applyRemote(d) {
   if (Array.isArray(d.cats)) { cats = d.cats; localStorage.setItem(LS.cats, JSON.stringify(cats)); }
   if (Array.isArray(d.assets)) { assets = d.assets; localStorage.setItem(LS.assets, JSON.stringify(assets)); }
   if (d.rules && typeof d.rules === "object") { rules = d.rules; localStorage.setItem(LS.rules, JSON.stringify(rules)); }
+  if (d.theme === "light" || d.theme === "dark") setTheme(d.theme);
   cloud.applyingRemote = false;
   if (state.assetDetail && !assetById(state.assetDetail)) state.assetDetail = null;
   render();
