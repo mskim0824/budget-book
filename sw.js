@@ -1,9 +1,16 @@
-// 가계부 서비스워커 — 설치 가능(PWA) + 오프라인 캐시
-// 같은 출처(우리 앱 파일)만 캐시. Firebase 등 외부 요청은 그대로 통과.
-const CACHE = "budget-cache-v1";
+// 가계부 서비스워커 — 항상 최신 우선(네트워크), 오프라인 시 캐시
+// 캐시 이름을 바꾸면 옛 캐시는 자동 삭제됨 (업데이트마다 숫자 올리기)
+const CACHE = "budget-cache-v3";
 
 self.addEventListener("install", (e) => { self.skipWaiting(); });
-self.addEventListener("activate", (e) => { e.waitUntil(self.clients.claim()); });
+
+self.addEventListener("activate", (e) => {
+  e.waitUntil((async () => {
+    const keys = await caches.keys();
+    await Promise.all(keys.filter(k => k !== CACHE).map(k => caches.delete(k)));
+    await self.clients.claim();
+  })());
+});
 
 self.addEventListener("fetch", (e) => {
   const req = e.request;
@@ -12,14 +19,16 @@ self.addEventListener("fetch", (e) => {
   try { url = new URL(req.url); } catch { return; }
   if (url.origin !== self.location.origin) return; // 외부(Firebase/CDN)는 통과
 
-  // 네트워크 우선 → 실패 시 캐시 (최신 반영 + 오프라인 대비)
-  e.respondWith(
-    fetch(req)
-      .then((resp) => {
-        const copy = resp.clone();
-        caches.open(CACHE).then((c) => c.put(req, copy)).catch(() => {});
-        return resp;
-      })
-      .catch(() => caches.match(req))
-  );
+  // 항상 네트워크에서 새로 받음(브라우저 HTTP 캐시도 무시) → 실패하면 캐시
+  e.respondWith((async () => {
+    try {
+      const fresh = await fetch(req, { cache: "no-store" });
+      const cache = await caches.open(CACHE);
+      cache.put(req, fresh.clone());
+      return fresh;
+    } catch (err) {
+      const cached = await caches.match(req);
+      return cached || Response.error();
+    }
+  })());
 });
