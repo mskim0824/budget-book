@@ -210,6 +210,7 @@
   .wheel-center { position: absolute; left: 0; right: 0; top: 70px; height: 40px; border-top: 1px solid var(--primary); border-bottom: 1px solid var(--primary); pointer-events: none; }
   /* 홈 검색 아이콘 */
   #home-search { font-size: 17px; }
+  #search-modal { z-index: 45; }
 </style>
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
@@ -626,11 +627,13 @@ function render() {
   else if (state.tab === "stats") renderStats();
   else if (state.tab === "assets") renderAssets();
   else renderSettings();
+  const _sm = document.getElementById("search-modal");
+  if (_sm && _sm.classList.contains("open")) doSearch(); // 검색 열려있으면 결과 갱신
 }
 
 function summaryCard(income, expense, savings) {
   savings = savings || 0;
-  const balance = income - expense - savings;
+  const balance = income - expense;
   return `<div class="card">
     <div class="summary-row">
       <div class="summary-item"><div class="lbl">수입</div><div class="val" style="color:var(--income)">${won(income)}</div></div>
@@ -885,7 +888,7 @@ function renderSettings() {
       <div class="setting-row"><div><div class="s-label">CSV 가져오기</div><div class="s-sub">다른 가계부 내보낸 파일 불러오기</div></div><button class="link-btn" id="import-csv">가져오기</button></div>
       <div class="setting-row" style="border:none"><div><div class="s-label danger">데이터 초기화</div><div class="s-sub">모든 거래·카테고리·자산 삭제</div></div><button class="link-btn danger" id="reset-data">초기화</button></div>
     </div>
-    <div style="text-align:center;color:var(--text-dim);font-size:12px;margin:18px 0">가계부 웹 · v1.8</div>`;
+    <div style="text-align:center;color:var(--text-dim);font-size:12px;margin:18px 0">가계부 웹 · v2.1</div>`;
 }
 
 // ---------- 탭 / 월 ----------
@@ -1386,7 +1389,7 @@ function updateSearchChips() {
 }
 function doSearch() {
   const q = $("search-q").value.trim().toLowerCase();
-  let list = txs.filter(t => !t.assetEntry);
+  let list = txs.filter(t => !t.assetEntry && !isPlanned(t)); // 예정(미래 달) 제외
   if (state.search.type === "income") list = list.filter(t => t.type === "income" && !t.transfer);
   else if (state.search.type === "expense") list = list.filter(t => t.type === "expense" && !t.transfer);
   if (state.search.method !== "all") list = list.filter(t => (t.method||"cash") === state.search.method);
@@ -1401,6 +1404,22 @@ function doSearch() {
   list.sort((a,b) => state.search.sort === "amount" ? (b.amount-a.amount) : b.date.localeCompare(a.date));
   state.search.results = list; renderSearchResults();
 }
+function searchRow(t) {
+  const c = catById(t.categoryId);
+  const ta = t.transfer ? assetById(t.targetAssetId) : null;
+  const name = t.transfer ? (ta ? ta.name : "저축") : (c ? c.name : "미분류");
+  const emoji = t.transfer ? (ta ? ta.emoji : "💰") : (c ? c.emoji : "❓");
+  const dot = t.transfer ? "rgba(92,107,192,.15)" : ((c ? c.color : "#9aa0a6") + "22");
+  const sign = t.transfer ? "" : (t.type === "expense" ? "-" : "+");
+  const color = t.transfer ? "var(--savings)" : (t.exclude ? "var(--text-dim)" : (t.type === "expense" ? "var(--expense)" : "var(--income)"));
+  const dt = t.date.slice(2).replace(/-/g, ".");
+  return `<div class="tx" data-edit="${t.id}">
+      <span style="width:54px;flex-shrink:0;font-size:12px;color:var(--text-dim)">${dt}</span>
+      <div class="icon" style="background:${dot};width:34px;height:34px;font-size:17px">${emoji}</div>
+      <div class="body"><div class="name" style="font-size:14px">${esc(name)}</div>${t.memo?`<div class="sub">${esc(t.memo)}</div>`:""}</div>
+      <div class="amt" style="color:${color}">${sign}${won(t.amount)}</div>
+    </div>`;
+}
 function renderSearchResults() {
   const list = state.search.results || [];
   const inc = list.filter(t=>t.type==="income" && !t.transfer).reduce((s,t)=>s+t.amount,0);
@@ -1414,7 +1433,7 @@ function renderSearchResults() {
     <div style="display:flex;justify-content:space-around;padding:10px 0;font-size:13px">
       <span style="color:var(--income)">수입 ${won(inc)}</span><span style="color:var(--expense)">지출 ${won(exp)}</span><span style="color:var(--savings)">저축 ${won(sav)}</span>
     </div>
-    ${list.length ? `<div class="card" style="padding:6px 14px;margin:0">${list.map(t=>txRow(t)).join("")}</div>` : `<div class="empty">검색 결과가 없습니다.</div>`}`;
+    ${list.length ? `<div class="card" style="padding:6px 14px;margin:0">${list.map(searchRow).join("")}</div>` : `<div class="empty">검색 결과가 없습니다.</div>`}`;
 }
 $("search-x").addEventListener("click", () => searchModal.classList.remove("open"));
 $("search-go").addEventListener("click", doSearch);
@@ -1424,7 +1443,7 @@ searchModal.addEventListener("click", (e) => {
   const st = e.target.closest("[data-st]"); if (st) { state.search.type = st.dataset.st; updateSearchChips(); return; }
   const sm = e.target.closest("[data-sm]"); if (sm) { state.search.method = sm.dataset.sm; updateSearchChips(); return; }
   const ss = e.target.closest("[data-ss]"); if (ss) { state.search.sort = ss.dataset.ss; doSearch(); return; }
-  const ed = e.target.closest("[data-edit]"); if (ed) { searchModal.classList.remove("open"); openTxModal(ed.dataset.edit); return; }
+  const ed = e.target.closest("[data-edit]"); if (ed) { openTxModal(ed.dataset.edit); return; }
 });
 
 // ---------- 입력칸 지우기(X) ----------
