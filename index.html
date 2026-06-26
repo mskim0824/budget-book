@@ -28,16 +28,15 @@
   body { font-family: "Noto Sans KR", -apple-system, "Segoe UI", Roboto, "Malgun Gothic", sans-serif;
     background: var(--bg); color: var(--text); max-width: 480px; margin: 0 auto;
     min-height: 100vh; padding-bottom: 76px; transition: background .2s, color .2s; }
-  header { position: sticky; top: 0; z-index: 10; background: var(--surface);
-    border-bottom: 1px solid var(--border); padding: 14px 16px; }
-  header .title { font-size: 20px; font-weight: 700; }
+  header { padding: 8px 12px 0; }
   .month-nav { display: flex; align-items: center; justify-content: center; gap: 18px; margin-top: 6px; }
   .month-nav button { border: none; background: var(--surface-2); color: var(--text);
     width: 32px; height: 32px; border-radius: 50%; font-size: 18px; cursor: pointer; }
   .month-nav .label { font-size: 15px; font-weight: 600; min-width: 110px; text-align: center; }
-  main { padding: 12px 14px; }
-  .card { background: var(--surface); border-radius: 16px; box-shadow: var(--shadow); padding: 18px; margin-bottom: 14px; }
-  .section-title { font-size: 15px; font-weight: 700; margin: 6px 2px 8px; }
+  main { padding: 6px 12px; }
+  .topbar { display: flex; align-items: center; height: 40px; margin-bottom: 10px; }
+  .card { background: var(--surface); border-radius: 14px; box-shadow: var(--shadow); padding: 11px; margin-bottom: 8px; }
+  .section-title { font-size: 15px; font-weight: 700; margin: 2px 2px 5px; }
   .summary-row { display: flex; justify-content: space-around; align-items: center; }
   .summary-item { text-align: center; }
   .summary-item .lbl { font-size: 12px; color: var(--text-dim); }
@@ -45,31 +44,31 @@
   .summary-item .lbl { white-space: nowrap; }
   .divider-v { width: 1px; height: 38px; background: var(--border); }
   .balance-row { display: flex; justify-content: space-between; align-items: center;
-    border-top: 1px solid var(--border); margin-top: 14px; padding-top: 14px; }
+    border-top: 1px solid var(--border); margin-top: 7px; padding-top: 7px; }
   .balance-row .lbl { font-weight: 600; }
   .balance-row .val { font-size: 20px; font-weight: 800; }
   /* 달력 */
   .cal-head { display: grid; grid-template-columns: repeat(7,1fr); text-align: center;
-    font-size: 12px; color: var(--text-dim); margin-bottom: 6px; }
+    font-size: 12px; color: var(--text-dim); margin-bottom: 3px; }
   .cal-head .sun { color: var(--expense); }
   .cal-head .sat { color: var(--primary); }
   .cal-grid { display: grid; grid-template-columns: repeat(7,1fr); gap: 2px; }
-  .cal-day { min-height: 66px; border: none; background: none; border-radius: 10px; cursor: pointer;
-    display: flex; flex-direction: column; align-items: center; padding: 4px 1px; gap: 1px; color: var(--text); overflow: hidden; }
+  .cal-day { min-height: 42px; border: none; background: none; border-radius: 8px; cursor: pointer;
+    display: flex; flex-direction: column; align-items: center; padding: 3px 1px; gap: 0; color: var(--text); overflow: hidden; }
   .cal-day.other { visibility: hidden; }
   .cal-day .d { font-size: 12px; line-height: 1.2; }
   .cal-day.today { background: var(--surface-2); }
   .cal-day.today .d { font-weight: 800; color: var(--primary); }
   .cal-day.sel { background: var(--primary); }
   .cal-day.sel .d { color: #fff; font-weight: 700; }
-  .cal-amt { font-size: 8px; line-height: 1.3; font-weight: 700; min-height: 10px; white-space: nowrap; }
+  .cal-amt { font-size: 8px; line-height: 1.1; font-weight: 700; min-height: 9px; white-space: nowrap; }
   .cal-amt.inc { color: var(--income); }
   .cal-amt.exp { color: var(--expense); }
   .cal-amt.sav { color: var(--savings); }
   .cal-day.sel .cal-amt { color: #fff; }
   .cal-day.future .cal-amt { opacity: .4; }
   /* 거래 줄 */
-  .tx { display: flex; align-items: center; gap: 12px; padding: 11px 4px; border-bottom: 1px solid var(--border); }
+  .tx { display: flex; align-items: center; gap: 12px; padding: 9px 4px; border-bottom: 1px solid var(--border); }
   .tx:last-child { border-bottom: none; }
   .tx .icon { width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center;
     justify-content: center; font-size: 20px; flex-shrink: 0; }
@@ -84,15 +83,15 @@
     background: var(--surface); color: var(--text); font-size: 13px; cursor: pointer; }
   .chip.active { background: var(--primary); color: #fff; border-color: var(--primary); }
   .donut-wrap { display: flex; flex-direction: column; align-items: center; }
-  .legend { width: 100%; margin-top: 10px; }
-  .legend-row { display: flex; align-items: center; gap: 8px; padding: 4px 0; font-size: 14px; }
+  .legend { width: 100%; margin-top: 6px; }
+  .legend-row { display: flex; align-items: center; gap: 8px; padding: 2px 0; font-size: 13px; }
   .legend-dot { width: 12px; height: 12px; border-radius: 50%; flex-shrink: 0; }
   .legend-row .lname { flex: 1; }
   .legend-row .lpct { color: var(--text-dim); font-size: 12px; }
   .legend-row .lamt { font-weight: 600; }
   .bars { display: flex; align-items: flex-end; justify-content: space-around; gap: 4px; padding-top: 8px; }
   .bar-col { display: flex; flex-direction: column; align-items: center; flex: 1; }
-  .bar-pair { display: flex; align-items: flex-end; gap: 3px; height: 140px; }
+  .bar-pair { display: flex; align-items: flex-end; gap: 3px; height: 90px; }
   .bar { border-radius: 3px 3px 0 0; transition: height .3s; min-height: 2px; }
   .bar-label { font-size: 11px; color: var(--text-dim); margin-top: 6px; }
   .bar-legend { display: flex; justify-content: center; gap: 18px; font-size: 12px; margin-bottom: 6px; }
@@ -104,7 +103,7 @@
   .asset-total { text-align: center; }
   .asset-total .lbl { font-size: 13px; color: var(--text-dim); }
   .asset-total .val { font-size: 30px; font-weight: 800; margin-top: 6px; }
-  .asset-row { display: flex; align-items: center; gap: 12px; padding: 14px 4px; border-bottom: 1px solid var(--border); cursor: pointer; }
+  .asset-row { display: flex; align-items: center; gap: 12px; padding: 11px 4px; border-bottom: 1px solid var(--border); cursor: pointer; }
   .asset-row:last-child { border-bottom: none; }
   .asset-row .icon { font-size: 22px; width: 30px; text-align: center; }
   .asset-row .name { flex: 1; font-weight: 600; }
@@ -117,7 +116,7 @@
   .ledger-row .lv { font-weight: 700; font-size: 14px; white-space: nowrap; }
   .ledger-row .lb { font-size: 11px; color: var(--text-dim); white-space: nowrap; margin-left: 6px; }
   /* 설정 */
-  .setting-row { display: flex; align-items: center; justify-content: space-between; padding: 14px 4px; border-bottom: 1px solid var(--border); }
+  .setting-row { display: flex; align-items: center; justify-content: space-between; padding: 11px 4px; border-bottom: 1px solid var(--border); }
   .setting-row .s-label { font-size: 15px; }
   .setting-row .s-sub { font-size: 12px; color: var(--text-dim); margin-top: 2px; }
   .seg { display: inline-flex; border: 1px solid var(--border); border-radius: 10px; overflow: hidden; }
@@ -127,9 +126,14 @@
   .danger { color: var(--expense) !important; }
   .cat-row { display: flex; align-items: center; gap: 12px; padding: 10px 4px; border-bottom: 1px solid var(--border); }
   .cat-row .name { flex: 1; }
-  .fab { position: fixed; bottom: 88px; left: 50%; transform: translateX(-50%); background: var(--primary); color: #fff;
-    border: none; border-radius: 28px; padding: 14px 24px; font-size: 16px; font-weight: 700; cursor: pointer;
-    box-shadow: 0 4px 12px rgba(0,0,0,.25); z-index: 20; display: flex; align-items: center; gap: 8px; }
+  .fab { position: fixed; bottom: 66px; right: 16px; background: var(--primary); color: #fff;
+    border: none; border-radius: 50%; width: 54px; height: 54px; padding: 0; font-size: 28px; line-height: 1; cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0,0,0,.25); z-index: 20; display: flex; align-items: center; justify-content: center; }
+  .icon-btn { width: 38px; height: 38px; border-radius: 50%; border: 1px solid var(--border); background: var(--surface);
+    color: var(--text); font-size: 19px; line-height: 1; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; }
+  .add-btn { width: 38px; height: 38px; border-radius: 50%; border: none; background: var(--primary); color: #fff;
+    font-size: 24px; line-height: 1; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .view-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px; min-height: 38px; }
   nav.tabs { position: fixed; bottom: 0; left: 50%; transform: translateX(-50%); width: 100%; max-width: 480px;
     background: var(--surface); border-top: 1px solid var(--border); display: flex; z-index: 15; }
   nav.tabs button { flex: 1; border: none; background: none; color: var(--text-dim); padding: 8px 0 10px; font-size: 11px;
@@ -190,20 +194,30 @@
   .slider:before { content: ""; position: absolute; height: 18px; width: 18px; left: 3px; top: 3px; background: #fff; border-radius: 50%; transition: .2s; }
   .switch input:checked + .slider { background: var(--primary); }
   .switch input:checked + .slider:before { transform: translateX(18px); }
+  /* 입력칸 지우기 X */
+  .input-wrap { position: relative; }
+  .input-wrap > input { padding-right: 34px; }
+  .clear-x { position: absolute; right: 8px; top: 50%; transform: translateY(-50%); border: none; background: var(--surface-2);
+    color: var(--text-dim); width: 22px; height: 22px; border-radius: 50%; font-size: 11px; cursor: pointer;
+    display: none; align-items: center; justify-content: center; line-height: 1; padding: 0; }
+  .input-wrap > input:not(:placeholder-shown) ~ .clear-x { display: flex; }
+  /* 휠 날짜 선택 */
+  .wheel-wrap { position: relative; display: flex; gap: 12px; }
+  .wheel { flex: 1; height: 180px; overflow-y: scroll; scroll-snap-type: y mandatory; text-align: center; padding: 70px 0; scrollbar-width: none; }
+  .wheel::-webkit-scrollbar { display: none; }
+  .wheel-item { height: 40px; line-height: 40px; scroll-snap-align: center; font-size: 18px; color: var(--text-dim); }
+  .wheel-item.on { color: var(--text); font-weight: 700; font-size: 21px; }
+  .wheel-center { position: absolute; left: 0; right: 0; top: 70px; height: 40px; border-top: 1px solid var(--primary); border-bottom: 1px solid var(--primary); pointer-events: none; }
+  /* 홈 검색 아이콘 */
+  #home-search { font-size: 17px; }
 </style>
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
 </head>
 <body>
-  <header>
-    <div class="title" id="header-title">가계부</div>
-    <div class="month-nav" id="month-nav">
-      <button id="m-prev">‹</button><span class="label" id="m-label"></span><button id="m-next">›</button>
-    </div>
-  </header>
   <main id="view"></main>
-  <button class="fab" id="fab">＋ 입력</button>
+  <button class="fab" id="fab">＋</button>
   <nav class="tabs">
     <button data-tab="home" class="active"><span class="ic">🏠</span>홈</button>
     <button data-tab="stats"><span class="ic">📊</span>통계</button>
@@ -219,10 +233,13 @@
     </div>
     <div class="field"><div class="type-toggle"><button id="t-expense">지출</button><button id="t-income">수입</button></div></div>
     <div class="field"><label>금액</label><input type="number" id="f-amount" inputmode="numeric" placeholder="0" /></div>
-    <div class="field"><label>메모 (선택)</label><input type="text" id="f-memo" placeholder="예: 점심" /></div>
+    <div class="field"><label>메모 (선택)</label><input class="clearable" type="text" id="f-memo" placeholder="예: 점심" /></div>
     <div class="field"><label>카테고리 <span style="font-size:12px;color:var(--text-dim)" id="cat-hint"></span></label><div class="cat-pick" id="f-cats"></div></div>
-    <div class="field" id="target-field" style="display:none"><label>이체 대상 (자산)</label><div class="cat-pick" id="f-targets"></div>
-      <div class="hint">현금에서 빠져 선택한 자산으로 이동합니다.</div></div>
+    <div id="target-info" style="display:none;margin-bottom:12px">
+      <button class="opt3-btn" id="open-target" style="width:100%;flex-direction:row;justify-content:space-between;padding:12px 14px;min-height:0">
+        <span class="opt3-label">이체 대상</span><span class="opt3-val" id="target-name">선택하기 ›</span></button>
+    </div>
+    <div class="field" id="date-field" style="display:none"><label>날짜</label><input type="date" id="f-date" /></div>
 
     <!-- 결제수단 / 반복 / 제외 -->
     <div class="opt3">
@@ -259,15 +276,62 @@
     <button class="btn-primary" id="rm-done" style="margin-top:16px">확인</button>
   </div></div>
 
+  <!-- 이체 대상 팝업 -->
+  <div class="overlay" id="target-modal"><div class="sheet">
+    <div class="sheet-head"><h2>이체 대상 자산</h2><button id="tm-close" class="sheet-x">✕</button></div>
+    <div class="hint" style="margin-bottom:12px">현금에서 빠져 선택한 자산으로 이동합니다.</div>
+    <div class="cat-pick" id="f-targets"></div>
+  </div></div>
+
   <!-- 반복 삭제 선택 -->
   <div class="overlay" id="del-modal"><div class="sheet">
-    <h2>반복 거래 삭제</h2>
+    <div class="sheet-head"><h2>반복 거래 삭제</h2><button id="del-cancel" class="sheet-x">✕</button></div>
     <p class="hint" id="del-desc" style="margin-bottom:14px"></p>
     <button class="del-opt" data-delmode="one">이 항목만 삭제</button>
     <button class="del-opt" data-delmode="after">이날 이후 모든 항목 삭제</button>
     <button class="del-opt" data-delmode="after-rule">이후 모든 항목 + 반복 설정 삭제</button>
     <button class="del-opt danger" data-delmode="all">전체 반복 데이터 + 설정 삭제</button>
-    <button class="btn-ghost" id="del-cancel">취소</button>
+  </div></div>
+
+  <!-- 확인(삭제) 팝업 -->
+  <div class="overlay" id="confirm-modal"><div class="sheet">
+    <div class="sheet-head"><h2 id="confirm-title">확인</h2><button id="confirm-x" class="sheet-x">✕</button></div>
+    <p class="hint" id="confirm-msg" style="margin-bottom:16px"></p>
+    <button class="btn-primary" id="confirm-ok" style="background:var(--expense)">삭제</button>
+  </div></div>
+
+  <!-- 휠 날짜 선택 -->
+  <div class="overlay" id="wheel-modal"><div class="sheet">
+    <div class="sheet-head"><h2>날짜 선택</h2><button id="wheel-x" class="sheet-x">✕</button></div>
+    <div class="wheel-wrap"><div class="wheel" id="wheel-year"></div><div class="wheel" id="wheel-month"></div><div class="wheel-center"></div></div>
+    <button class="btn-primary" id="wheel-ok" style="margin-top:14px">확인</button>
+  </div></div>
+
+  <!-- 검색 -->
+  <div class="overlay" id="search-modal"><div class="sheet" style="max-height:94vh">
+    <div class="sheet-head"><h2>검색</h2><button id="search-x" class="sheet-x">✕</button></div>
+    <input class="clearable" id="search-q" type="text" placeholder="메모·카테고리 검색"
+      style="width:100%;padding:11px;border:1px solid var(--border);border-radius:10px;background:var(--surface);color:var(--text);margin-bottom:14px" />
+    <div class="sub-label">기간</div>
+    <div class="chips" id="search-period">
+      <button class="chip active" data-sp="all">전체</button><button class="chip" data-sp="week">이번 주</button>
+      <button class="chip" data-sp="month">이번 달</button><button class="chip" data-sp="custom">사용자 지정</button>
+    </div>
+    <div id="search-range" style="display:none;align-items:center;gap:8px;margin-bottom:12px">
+      <input type="date" id="search-from" style="flex:1;padding:9px;border:1px solid var(--border);border-radius:8px;background:var(--surface);color:var(--text)" />
+      <span style="color:var(--text-dim)">~</span>
+      <input type="date" id="search-to" style="flex:1;padding:9px;border:1px solid var(--border);border-radius:8px;background:var(--surface);color:var(--text)" />
+    </div>
+    <div class="sub-label">유형</div>
+    <div class="chips" id="search-type">
+      <button class="chip active" data-st="all">전체</button><button class="chip" data-st="income">수입</button><button class="chip" data-st="expense">지출</button>
+    </div>
+    <div class="sub-label">지불방식</div>
+    <div class="chips" id="search-method">
+      <button class="chip active" data-sm="all">전체</button><button class="chip" data-sm="cash">현금</button><button class="chip" data-sm="card">카드</button>
+    </div>
+    <button class="btn-primary" id="search-go" style="margin-bottom:14px">🔍 검색</button>
+    <div id="search-results"></div>
   </div></div>
 
   <!-- 반복 수정 범위 선택 -->
@@ -283,7 +347,7 @@
   <div class="overlay" id="cat-modal"><div class="sheet">
     <div class="sheet-head"><h2 id="cat-modal-title">카테고리 추가</h2><button id="c-cancel" class="sheet-x">✕</button></div>
     <div class="field"><div class="type-toggle"><button id="c-expense">지출</button><button id="c-income">수입</button></div></div>
-    <div class="field"><label>이름</label><input type="text" id="c-name" placeholder="예: 카페" /></div>
+    <div class="field"><label>이름</label><input class="clearable" type="text" id="c-name" placeholder="예: 카페" /></div>
     <div class="field" id="c-transfer-field"><label class="check-row"><input type="checkbox" id="c-transfer" /> 저축·이체용 (지출에 안 잡히고 자산으로 이동)</label></div>
     <div class="field"><label>아이콘</label><div class="emoji-pick" id="c-emojis"></div></div>
     <div class="field"><label>색상</label><div class="color-pick" id="c-colors"></div></div>
@@ -293,7 +357,7 @@
   <!-- 자산 수정 -->
   <div class="overlay" id="asset-modal"><div class="sheet">
     <div class="sheet-head"><h2 id="asset-modal-title">자산 수정</h2><button id="a-cancel" class="sheet-x">✕</button></div>
-    <div class="field"><label>이름</label><input type="text" id="a-name" placeholder="예: 비상금" /></div>
+    <div class="field"><label>이름</label><input class="clearable" type="text" id="a-name" placeholder="예: 비상금" /></div>
     <div class="field"><label>아이콘</label><div class="emoji-pick" id="a-emojis"></div></div>
     <button class="btn-primary" id="a-save">저장</button>
     <button class="btn-ghost danger" id="a-delete">삭제</button>
@@ -305,7 +369,7 @@
     <div class="field"><div class="type-toggle"><button id="ae-in">입금 (+)</button><button id="ae-out">출금 (−)</button></div></div>
     <div class="field"><label>금액</label><input type="number" id="ae-amount" inputmode="numeric" placeholder="0" /></div>
     <div class="field"><label>날짜</label><input type="date" id="ae-date" /></div>
-    <div class="field"><label>메모 (선택)</label><input type="text" id="ae-memo" placeholder="예: 이자" /></div>
+    <div class="field"><label>메모 (선택)</label><input class="clearable" type="text" id="ae-memo" placeholder="예: 이자" /></div>
     <button class="btn-primary" id="ae-save">저장</button>
   </div></div>
 
@@ -462,6 +526,7 @@ const state = {
   catForm: { type:"expense", emoji:EMOJIS[0], color:COLORS[0], transfer:false },
   assetForm: { id:null, emoji:EMOJIS[0] },
   aentry: { assetId:null, dir:1 },
+  search: { period:"all", type:"all", method:"all", sort:"date", results:null },
 };
 
 // ---------- 헬퍼 ----------
@@ -554,9 +619,6 @@ function topUpUnlimited() {
 // ---------- 렌더 ----------
 const view = document.getElementById("view");
 function render() {
-  document.getElementById("month-nav").style.display = state.tab === "home" ? "flex" : "none";
-  document.getElementById("m-label").textContent = monthLabel(state.month);
-  document.getElementById("header-title").textContent = ({home:"가계부", stats:"통계", assets:"자산", settings:"설정"})[state.tab];
   document.getElementById("fab").style.display = (state.tab === "home") ? "flex" : "none";
   document.querySelectorAll("nav.tabs button").forEach(b => b.classList.toggle("active", b.dataset.tab === state.tab));
   if (state.tab === "home") renderHome();
@@ -586,14 +648,15 @@ function txRow(t, { deletable=false } = {}) {
   const plannedTag = planned ? ` <span style="font-size:11px;color:var(--primary)">예정</span>` : "";
   const op = planned ? "opacity:.55;" : "";
   if (t.transfer) {
-    const dot = c ? c.color : "#9aa0a6";
+    const ta = assetById(t.targetAssetId);
+    const sub = (t.group ? "🔁 " : "") + "저축" + (t.memo ? " · " + esc(t.memo) : "");
     return `<div class="tx" style="${op}">
-        <div class="icon" style="background:${dot}22">${c ? c.emoji : "🐷"}</div>
+        <div class="icon" style="background:rgba(92,107,192,.15)">${ta ? ta.emoji : "💰"}</div>
         <div class="body" data-edit="${t.id}">
-          <div class="name">${c?esc(c.name):"저축"} <span style="font-size:11px;color:var(--text-dim)">이체</span>${plannedTag}</div>
-          <div class="sub">${t.group?"🔁 ":""}→ ${esc(assetName(t.targetAssetId))}${t.memo?" · "+esc(t.memo):""}</div>
+          <div class="name">${esc(ta ? ta.name : "저축")}${plannedTag}</div>
+          <div class="sub">${sub}</div>
         </div>
-        <div class="amt" style="color:var(--text-dim)">${won(t.amount)}</div>
+        <div class="amt" style="color:var(--savings)">${won(t.amount)}</div>
         ${deletable ? `<button class="del" data-del="${t.id}">✕</button>` : ""}
       </div>`;
   }
@@ -628,14 +691,14 @@ function donutHTML(slices) {
     return `<div class="legend-row"><span class="legend-dot" style="background:${col}"></span>
       <span class="lname">${name}</span><span class="lpct">${(s.total/total*100).toFixed(0)}%</span><span class="lamt">${won(s.total)}</span></div>`;
   }).join("");
-  return `<div class="donut-wrap"><svg viewBox="0 0 42 42" width="180" height="180" style="transform:rotate(-90deg)">${circles}</svg><div class="legend">${legend}</div></div>`;
+  return `<div class="donut-wrap"><svg viewBox="0 0 42 42" width="140" height="140" style="transform:rotate(-90deg)">${circles}</svg><div class="legend">${legend}</div></div>`;
 }
 
 function trendChart(trend, barW) {
   const max = Math.max(1, ...trend.flatMap(t => [t.income, t.expense]));
   const bars = trend.map(t => `<div class="bar-col"><div class="bar-pair">
-        <div class="bar" style="width:${barW}px;height:${t.income/max*140}px;background:var(--income)"></div>
-        <div class="bar" style="width:${barW}px;height:${t.expense/max*140}px;background:var(--expense)"></div>
+        <div class="bar" style="width:${barW}px;height:${t.income/max*90}px;background:var(--income)"></div>
+        <div class="bar" style="width:${barW}px;height:${t.expense/max*90}px;background:var(--expense)"></div>
       </div><div class="bar-label">${t.label}</div></div>`).join("");
   return `<div class="card"><div class="bar-legend">
       <span><span class="legend-dot" style="background:var(--income);display:inline-block;margin-right:4px"></span>수입</span>
@@ -670,6 +733,11 @@ function renderHome() {
   const selList = txs.filter(t => t.date === state.selectedDate && !t.assetEntry).sort((a,b) => b.id.localeCompare(a.id));
   const selInc = sumByType(selList, "income"), selExp = sumByType(selList, "expense"), selSav = savingsOf(selList);
   view.innerHTML = `
+    <div class="topbar">
+      <div style="width:38px;flex-shrink:0"></div>
+      <div class="period-nav" style="margin:0;flex:1"><button data-mnav="-1">‹</button><span class="label" id="m-label" style="cursor:pointer;min-width:auto">${monthLabel(state.month)}</span><button data-mnav="1">›</button></div>
+      <button class="icon-btn" id="home-search" style="flex-shrink:0">🔍</button>
+    </div>
     ${summaryCard(income, expense, savings)}
     <div class="card">
       <div class="cal-head"><span class="sun">일</span><span>월</span><span>화</span><span>수</span><span>목</span><span>금</span><span class="sat">토</span></div>
@@ -697,8 +765,11 @@ function renderStats() {
   const income = sumByType(periodList, "income"), expense = sumByType(periodList, "expense"), savings = savingsOf(periodList);
   const slices = aggregate(periodList.filter(t => t.type === state.donutType && !t.transfer && !t.exclude && !isPlanned(t)));
   view.innerHTML = `
-    <div class="chips"><button class="chip ${!isYear?'active':''}" data-smode="month">월</button><button class="chip ${isYear?'active':''}" data-smode="year">년</button></div>
-    <div class="period-nav"><button data-snav="-1">‹</button><span class="label">${label}</span><button data-snav="1">›</button></div>
+    <div class="topbar">
+      <button class="chip ${!isYear?'active':''}" data-smode="month">월</button>
+      <div class="period-nav" style="margin:0;flex:1"><button data-snav="-1">‹</button><span class="label" id="stats-period" style="min-width:auto;cursor:pointer">${label}</span><button data-snav="1">›</button></div>
+      <button class="chip ${isYear?'active':''}" data-smode="year">년</button>
+    </div>
     ${summaryCard(income, expense, savings)}
     <div class="section-title">${isYear ? "월별 추이 (1~12월)" : "최근 6개월 추이"}</div>
     ${trendChart(trend, isYear ? 7 : 10)}
@@ -716,9 +787,11 @@ function renderAssets() {
       <span class="amt">${won(assetBalance(a))}</span><span class="chev">›</span>
     </div>`).join("");
   view.innerHTML = `
-    <div class="card asset-total"><div class="lbl">총 자산</div><div class="val">${won(total)}</div></div>
-    <div class="card" style="padding:6px 14px">${rows || `<div class="empty">자산 항목이 없어요</div>`}</div>
-    <button class="link-btn" id="add-asset" style="display:block;margin:0 auto">＋ 자산 항목 추가</button>`;
+    <div class="card" style="display:flex;align-items:center;justify-content:space-between">
+      <div><div style="font-size:13px;color:var(--text-dim)">총 자산</div><div style="font-size:26px;font-weight:800;margin-top:4px">${won(total)}</div></div>
+      <button class="add-btn" id="add-asset">＋</button>
+    </div>
+    <div class="card" style="padding:6px 14px">${rows || `<div class="empty">자산 항목이 없어요</div>`}</div>`;
 }
 
 function renderAssetDetail(id) {
@@ -752,15 +825,14 @@ function renderAssetDetail(id) {
         <span class="lb">${won(e.bal)}</span></div>`;
   }).join("");
   view.innerHTML = `
-    <button class="link-btn" id="asset-back" style="margin-bottom:10px">‹ 자산 목록</button>
+    <div class="view-head"><button class="icon-btn" id="asset-back">←</button><button class="add-btn" id="asset-add-entry">＋</button></div>
     <div class="card asset-total">
       <div class="lbl">${a.emoji} ${esc(a.name)}${a.cash?" (현금)":""}</div>
       <div class="val">${won(bal)}</div>
       <button class="link-btn" id="asset-edit" style="margin-top:12px">이름·아이콘 수정</button>
     </div>
-    <button class="fab" id="asset-add-entry" style="position:static;transform:none;width:100%;justify-content:center;margin-bottom:14px">＋ 입력</button>
     <div class="section-title">변동 내역 ${entries.length?`(${entries.length})`:""}</div>
-    <div class="card" style="padding:6px 14px">${rowsHtml || `<div class="empty">아직 변동 내역이 없어요<br>위 ＋입력 으로 추가해보세요</div>`}</div>`;
+    <div class="card" style="padding:6px 14px">${rowsHtml || `<div class="empty">아직 변동 내역이 없어요<br>오른쪽 위 ＋ 로 추가해보세요</div>`}</div>`;
 }
 
 function renderCatList(type) {
@@ -771,10 +843,9 @@ function renderCatList(type) {
       <button data-delcat="${c.id}" style="border:none;background:none;color:var(--text-dim);font-size:18px;cursor:pointer">🗑</button></div>`).join("")
     || '<div class="empty">항목이 없어요</div>';
   view.innerHTML = `
-    <button class="link-btn" id="cat-back" style="margin-bottom:10px">‹ 설정</button>
+    <div class="view-head"><button class="icon-btn" id="cat-back">←</button><button class="add-btn" data-addcat="${type}">＋</button></div>
     <div class="section-title">${label}</div>
-    <div class="card" style="padding:6px 14px">${items}</div>
-    <button class="link-btn" data-addcat="${type}" style="display:block;margin:0 auto">＋ 카테고리 추가</button>`;
+    <div class="card" style="padding:6px 14px">${items}</div>`;
 }
 
 function renderSettings() {
@@ -826,22 +897,28 @@ function shiftMonth(dir) {
   state.selectedDate = (monthKey(state.month) === todayStr.slice(0,7)) ? todayStr : ymd(state.month);
   render();
 }
-document.getElementById("m-prev").addEventListener("click", () => shiftMonth(-1));
-document.getElementById("m-next").addEventListener("click", () => shiftMonth(1));
 
 // ---------- 본문 위임 ----------
 view.addEventListener("click", (e) => {
+  const mn = e.target.closest("[data-mnav]"); if (mn) { shiftMonth(+mn.dataset.mnav); return; }
+  if (e.target.id === "m-label") { openMonthWheel(state.month.getFullYear(), state.month.getMonth()+1, (y,m) => { state.month = new Date(y, m-1, 1); state.selectedDate = (monthKey(state.month)===todayStr.slice(0,7))?todayStr:ymd(state.month); render(); }); return; }
+  if (e.target.id === "home-search") { openSearch(); return; }
   const dayEl = e.target.closest("[data-day]"); if (dayEl) { state.selectedDate = dayEl.dataset.day; renderHome(); return; }
   const editEl = e.target.closest("[data-edit]"); if (editEl) { openTxModal(editEl.dataset.edit); return; }
   const delEl = e.target.closest("[data-del]");
-  if (delEl) { const t = txs.find(x => x.id === delEl.dataset.del);
+  if (delEl) { const id = delEl.dataset.del; const t = txs.find(x => x.id === id);
     if (t && t.group) openDelModal(t);
-    else if (confirm("이 거래를 삭제할까요?")) { txs = txs.filter(x => x.id !== delEl.dataset.del); saveLS(LS.txs,txs); render(); }
+    else showConfirm("거래 삭제", "이 거래를 삭제할까요?", () => { txs = txs.filter(x => x.id !== id); saveLS(LS.txs,txs); render(); });
     return; }
   const dtb = e.target.closest("[data-dt]"); if (dtb) { state.donutType = dtb.dataset.dt; render(); return; }
   const sm = e.target.closest("[data-smode]"); if (sm) { state.stats.mode = sm.dataset.smode; render(); return; }
   const sn = e.target.closest("[data-snav]"); if (sn) { const dir = +sn.dataset.snav;
     if (state.stats.mode === "month") state.stats.month = new Date(state.stats.month.getFullYear(), state.stats.month.getMonth()+dir, 1); else state.stats.year += dir; render(); return; }
+  if (e.target.id === "stats-period") {
+    if (state.stats.mode === "month") openMonthWheel(state.stats.month.getFullYear(), state.stats.month.getMonth()+1, (y,m) => { state.stats.month = new Date(y, m-1, 1); render(); });
+    else openMonthWheel(state.stats.year, 1, (y) => { state.stats.year = y; render(); });
+    return;
+  }
   const asEl = e.target.closest("[data-asset]"); if (asEl) { state.assetDetail = asEl.dataset.asset; render(); return; }
   const cvEl = e.target.closest("[data-catview]"); if (cvEl) { state.catView = cvEl.dataset.catview; render(); return; }
   const acEl = e.target.closest("[data-addcat]"); if (acEl) { openCatModal(acEl.dataset.addcat); return; }
@@ -876,10 +953,11 @@ const txModal = document.getElementById("tx-modal");
 const $ = (id) => document.getElementById(id);
 const methodModal = document.getElementById("method-modal");
 const repeatModal = document.getElementById("repeat-modal");
+const targetModal = document.getElementById("target-modal");
 $("fab").addEventListener("click", () => openTxModal(null));
 $("f-close").addEventListener("click", () => txModal.classList.remove("open"));
-$("t-expense").addEventListener("click", () => { state.form.type="expense"; state.form.categoryId=null; state.form.targetAssetId=null; renderTxForm(); });
-$("t-income").addEventListener("click", () => { state.form.type="income"; state.form.categoryId=null; state.form.targetAssetId=null; renderTxForm(); });
+$("t-expense").addEventListener("click", () => { state.form.type="expense"; state.form.categoryId=null; state.form.targetAssetId=null; renderTxForm(); if (!$("f-amount").value) $("f-amount").focus(); });
+$("t-income").addEventListener("click", () => { state.form.type="income"; state.form.categoryId=null; state.form.targetAssetId=null; renderTxForm(); if (!$("f-amount").value) $("f-amount").focus(); });
 $("f-amount").addEventListener("input", () => { if (methodModal.classList.contains("open")) renderMethodModal(); });
 $("f-exclude").addEventListener("change", () => { state.form.exclude = $("f-exclude").checked; });
 $("f-save").addEventListener("click", saveTx);
@@ -896,6 +974,9 @@ $("mm-done").addEventListener("click", () => { methodModal.classList.remove("ope
 $("f-unlimited").addEventListener("change", () => { state.form.unlimited = $("f-unlimited").checked; renderRepeatModal(); });
 $("rm-close").addEventListener("click", () => repeatModal.classList.remove("open"));
 $("rm-done").addEventListener("click", () => { repeatModal.classList.remove("open"); updateTxCond(); });
+// 이체 대상 팝업
+$("open-target").addEventListener("click", openTargetModal);
+$("tm-close").addEventListener("click", () => targetModal.classList.remove("open"));
 
 function openTxModal(id) {
   $("f-install").value = "1"; $("f-count").value = "12";
@@ -908,6 +989,7 @@ function openTxModal(id) {
       exclude: !!t.exclude, repeat:"none", unlimited:true, date:t.date, editRecur, isInstall, recurCountPrefill:0 };
     $("tx-modal-title").textContent = "거래 수정";
     $("f-amount").value = t.amount; $("f-memo").value = t.memo || ""; $("f-exclude").checked = !!t.exclude;
+    $("f-date").value = t.date; $("date-field").style.display = "block";
     $("f-save").style.display = "block"; $("f-save").textContent = "수정 완료";
     if (editRecur) {
       const tail = txs.filter(x => x.group === t.group && x.date >= t.date).length;
@@ -919,33 +1001,27 @@ function openTxModal(id) {
       exclude:false, repeat:"none", unlimited:true, date: state.selectedDate || todayStr, editRecur:false, isInstall:false, recurCountPrefill:0 };
     $("tx-modal-title").textContent = "거래 입력";
     $("f-amount").value = ""; $("f-memo").value = ""; $("f-exclude").checked = false; $("f-save").style.display = "none";
+    $("date-field").style.display = "none";
   }
   $("f-unlimited").checked = state.form.unlimited;
   renderTxForm(); txModal.classList.add("open");
+  if (!id) $("f-amount").focus(); // 입력은 바로 금액 입력 가능하게
 }
 
 function pickCategory(id) {
   state.form.categoryId = id; renderTxForm();
   const cat = catById(id);
   const isTransfer = state.form.type === "expense" && cat && cat.transfer;
-  if (!state.form.id && !isTransfer) saveTx(); // 입력 모드: 카테고리 선택 즉시 저장
+  if (isTransfer) { openTargetModal(); return; }   // 저축 → 대상 팝업
+  if (!state.form.id) saveTx();                      // 입력 모드: 카테고리 선택 즉시 저장
 }
 function pickTarget(id) {
-  state.form.targetAssetId = id; renderTxForm();
-  if (!state.form.id) saveTx();
+  state.form.targetAssetId = id;
+  targetModal.classList.remove("open");
+  if (!state.form.id) saveTx(); else renderTxForm();
 }
-
-function renderTxForm() {
-  const exp = state.form.type === "expense";
-  $("t-expense").className = exp ? "act-exp" : ""; $("t-income").className = exp ? "" : "act-inc";
-  const box = $("f-cats");
-  box.innerHTML = cats.filter(c => c.type === state.form.type).map(c => {
-    const sel = c.id === state.form.categoryId;
-    return `<button class="cat-item ${sel?'sel':''}" data-pick="${c.id}">
-      <span class="cat-circle" style="background:${c.color}">${c.emoji}</span>
-      <span class="cat-name">${esc(c.name)}</span></button>`;
-  }).join("");
-  box.querySelectorAll("[data-pick]").forEach(b => b.addEventListener("click", () => pickCategory(b.dataset.pick)));
+function openTargetModal() { renderTargetModal(); targetModal.classList.add("open"); }
+function renderTargetModal() {
   const tbox = $("f-targets");
   tbox.innerHTML = assets.filter(a => !a.cash).map(a => {
     const sel = a.id === state.form.targetAssetId;
@@ -954,6 +1030,22 @@ function renderTxForm() {
       <span class="cat-name">${esc(a.name)}</span></button>`;
   }).join("");
   tbox.querySelectorAll("[data-target]").forEach(b => b.addEventListener("click", () => pickTarget(b.dataset.target)));
+}
+
+function renderTxForm() {
+  const exp = state.form.type === "expense";
+  $("t-expense").className = exp ? "act-exp" : ""; $("t-income").className = exp ? "" : "act-inc";
+  const box = $("f-cats");
+  box.innerHTML = cats.filter(c => c.type === state.form.type).map(c => {
+    const sel = c.id === state.form.categoryId;
+    let emoji = c.emoji, name = c.name;
+    // 저축(이체) 카테고리가 선택되고 대상이 정해지면 → 그 자산 이름·아이콘으로 표시
+    if (c.transfer && sel && state.form.targetAssetId) { const ta = assetById(state.form.targetAssetId); if (ta) { emoji = ta.emoji; name = ta.name; } }
+    return `<button class="cat-item ${sel?'sel':''}" data-pick="${c.id}">
+      <span class="cat-circle" style="background:${c.color}">${emoji}</span>
+      <span class="cat-name">${esc(name)}</span></button>`;
+  }).join("");
+  box.querySelectorAll("[data-pick]").forEach(b => b.addEventListener("click", () => pickCategory(b.dataset.pick)));
   updateTxCond();
 }
 
@@ -962,7 +1054,7 @@ function updateTxCond() {
   const cat = catById(state.form.categoryId);
   const isTransfer = exp && cat && cat.transfer;
   const methodAvail = exp && !isTransfer;
-  $("target-field").style.display = isTransfer ? "block" : "none";
+  $("target-info").style.display = "none"; // 대상은 저축 카테고리 칸 자체에 표시
   $("cat-hint").textContent = editing ? "" : "(선택하면 저장)";
   const install = parseInt($("f-install").value) || 1;
   $("method-val").textContent = !methodAvail ? "현금" : (state.form.method === "card" ? (install > 1 ? `카드 ${install}개월` : "카드") : "현금");
@@ -999,7 +1091,8 @@ function saveTx() {
   if (!amount || amount <= 0) { alert("금액을 올바르게 입력하세요"); return; }
   if (!state.form.categoryId) { alert("카테고리를 선택하세요"); return; }
   const type = state.form.type, categoryId = state.form.categoryId;
-  const memo = $("f-memo").value.trim(), date = state.form.date || todayStr;
+  const memo = $("f-memo").value.trim();
+  const date = state.form.id ? ($("f-date").value || state.form.date || todayStr) : (state.form.date || todayStr);
   const cat = catById(categoryId);
   const isTransfer = type === "expense" && cat && cat.transfer;
   if (isTransfer && !state.form.targetAssetId) { alert("이체 대상 자산을 선택하세요"); return; }
@@ -1090,6 +1183,17 @@ function doDelete(mode) {
   else if (mode === "all") { txs = txs.filter(x => x.group !== g); if (g) delete rules[g]; }
   saveLS(LS.txs, txs); saveLS(LS.rules, rules); render();
 }
+
+// ---------- 확인(삭제) 팝업 ----------
+const confirmModal = document.getElementById("confirm-modal");
+let _confirmCb = null;
+function showConfirm(title, msg, onOk) {
+  $("confirm-title").textContent = title; $("confirm-msg").textContent = msg;
+  _confirmCb = onOk; confirmModal.classList.add("open");
+}
+function closeConfirm() { confirmModal.classList.remove("open"); _confirmCb = null; }
+$("confirm-x").addEventListener("click", closeConfirm);
+$("confirm-ok").addEventListener("click", () => { const cb = _confirmCb; closeConfirm(); if (cb) cb(); });
 
 // ---------- 반복 수정 범위 모달 ----------
 const editModal = document.getElementById("edit-modal");
@@ -1206,6 +1310,7 @@ function openAEntry(assetId) {
   $("ae-amount").value = ""; $("ae-memo").value = "";
   $("ae-date").value = (state.selectedDate && state.selectedDate.slice(0,7) === CUR_MONTH) ? state.selectedDate : todayStr;
   renderAEntry(); aentryModal.classList.add("open");
+  $("ae-amount").focus();
 }
 function renderAEntry() {
   $("ae-in").className = state.aentry.dir > 0 ? "act-inc" : "";
@@ -1233,7 +1338,97 @@ function exportCsv() {
   const a = document.createElement("a"); a.href = URL.createObjectURL(blob); a.download = "가계부.csv"; a.click(); URL.revokeObjectURL(a.href);
 }
 
-[txModal, methodModal, repeatModal, catModal, assetModal, aentryModal].forEach(m => m.addEventListener("click", e => { if (e.target === m) m.classList.remove("open"); }));
+// ---------- 휠 날짜 선택 ----------
+const wheelModal = document.getElementById("wheel-modal");
+let _wheelApply = null;
+function setSel(el, i) { const n = el.children.length; i = Math.max(0, Math.min(n-1, i)); el._sel = i; [...el.children].forEach((x,j) => x.classList.toggle("on", j===i)); }
+function buildWheel(el, values, selIdx) {
+  el.innerHTML = values.map(v => `<div class="wheel-item">${v}</div>`).join("");
+  [...el.children].forEach((it,i) => it.addEventListener("click", () => { el.scrollTo({ top: i*40, behavior: "smooth" }); setSel(el, i); }));
+  requestAnimationFrame(() => { el.scrollTop = selIdx*40; setSel(el, selIdx); });
+  el.onscroll = () => { clearTimeout(el._t); el._t = setTimeout(() => setSel(el, Math.round(el.scrollTop/40)), 90); };
+}
+function openMonthWheel(year, month, onApply) {
+  _wheelApply = onApply;
+  const years = []; for (let y=2015; y<=2035; y++) years.push(y+"년");
+  const months = []; for (let m=1; m<=12; m++) months.push(m+"월");
+  wheelModal.classList.add("open");
+  buildWheel($("wheel-year"), years, Math.max(0, Math.min(20, year-2015)));
+  buildWheel($("wheel-month"), months, Math.max(0, Math.min(11, month-1)));
+}
+$("wheel-x").addEventListener("click", () => wheelModal.classList.remove("open"));
+$("wheel-ok").addEventListener("click", () => {
+  const y = 2015 + ($("wheel-year")._sel || 0);
+  const m = 1 + ($("wheel-month")._sel || 0);
+  wheelModal.classList.remove("open");
+  if (_wheelApply) _wheelApply(y, m);
+});
+
+// ---------- 검색 ----------
+const searchModal = document.getElementById("search-modal");
+function openSearch() {
+  state.search = { period:"all", type:"all", method:"all", sort:"date", results:null };
+  $("search-q").value = ""; $("search-q").dispatchEvent(new Event("input"));
+  $("search-range").style.display = "none"; $("search-results").innerHTML = "";
+  updateSearchChips(); searchModal.classList.add("open");
+}
+function updateSearchChips() {
+  $("search-period").querySelectorAll("[data-sp]").forEach(b => b.classList.toggle("active", b.dataset.sp===state.search.period));
+  $("search-type").querySelectorAll("[data-st]").forEach(b => b.classList.toggle("active", b.dataset.st===state.search.type));
+  $("search-method").querySelectorAll("[data-sm]").forEach(b => b.classList.toggle("active", b.dataset.sm===state.search.method));
+}
+function doSearch() {
+  const q = $("search-q").value.trim().toLowerCase();
+  let list = txs.filter(t => !t.assetEntry);
+  if (state.search.type === "income") list = list.filter(t => t.type === "income" && !t.transfer);
+  else if (state.search.type === "expense") list = list.filter(t => t.type === "expense" && !t.transfer);
+  if (state.search.method !== "all") list = list.filter(t => (t.method||"cash") === state.search.method);
+  const p = state.search.period;
+  if (p === "month") { const k = todayStr.slice(0,7); list = list.filter(t => t.date.startsWith(k)); }
+  else if (p === "week") { const now = new Date(); const st = new Date(now); st.setDate(now.getDate()-now.getDay()); const s = ymd(st); list = list.filter(t => t.date>=s && t.date<=todayStr); }
+  else if (p === "custom") { const f = $("search-from").value, to = $("search-to").value; if (f) list = list.filter(t => t.date>=f); if (to) list = list.filter(t => t.date<=to); }
+  if (q) list = list.filter(t =>
+    (t.memo||"").toLowerCase().includes(q) ||
+    (catById(t.categoryId)?.name||"").toLowerCase().includes(q) ||
+    (t.transfer && assetName(t.targetAssetId).toLowerCase().includes(q)));
+  list.sort((a,b) => state.search.sort === "amount" ? (b.amount-a.amount) : b.date.localeCompare(a.date));
+  state.search.results = list; renderSearchResults();
+}
+function renderSearchResults() {
+  const list = state.search.results || [];
+  const inc = list.filter(t=>t.type==="income" && !t.transfer).reduce((s,t)=>s+t.amount,0);
+  const exp = list.filter(t=>t.type==="expense" && !t.transfer).reduce((s,t)=>s+t.amount,0);
+  const sav = list.filter(t=>t.transfer).reduce((s,t)=>s+t.amount,0);
+  $("search-results").innerHTML = `
+    <div style="display:flex;justify-content:space-between;align-items:center;border-top:1px solid var(--border);padding-top:10px">
+      <span style="font-size:13px;color:var(--text-dim)">총 ${list.length}건</span>
+      <span style="display:flex;gap:6px"><button class="chip ${state.search.sort==='amount'?'active':''}" data-ss="amount">금액순</button><button class="chip ${state.search.sort==='date'?'active':''}" data-ss="date">날짜순</button></span>
+    </div>
+    <div style="display:flex;justify-content:space-around;padding:10px 0;font-size:13px">
+      <span style="color:var(--income)">수입 ${won(inc)}</span><span style="color:var(--expense)">지출 ${won(exp)}</span><span style="color:var(--savings)">저축 ${won(sav)}</span>
+    </div>
+    ${list.length ? `<div class="card" style="padding:6px 14px;margin:0">${list.map(t=>txRow(t)).join("")}</div>` : `<div class="empty">검색 결과가 없습니다.</div>`}`;
+}
+$("search-x").addEventListener("click", () => searchModal.classList.remove("open"));
+$("search-go").addEventListener("click", doSearch);
+searchModal.addEventListener("click", (e) => {
+  if (e.target === searchModal) { searchModal.classList.remove("open"); return; }
+  const sp = e.target.closest("[data-sp]"); if (sp) { state.search.period = sp.dataset.sp; updateSearchChips(); $("search-range").style.display = sp.dataset.sp==="custom"?"flex":"none"; return; }
+  const st = e.target.closest("[data-st]"); if (st) { state.search.type = st.dataset.st; updateSearchChips(); return; }
+  const sm = e.target.closest("[data-sm]"); if (sm) { state.search.method = sm.dataset.sm; updateSearchChips(); return; }
+  const ss = e.target.closest("[data-ss]"); if (ss) { state.search.sort = ss.dataset.ss; doSearch(); return; }
+  const ed = e.target.closest("[data-edit]"); if (ed) { searchModal.classList.remove("open"); openTxModal(ed.dataset.edit); return; }
+});
+
+// ---------- 입력칸 지우기(X) ----------
+document.querySelectorAll("input.clearable").forEach(inp => {
+  const wrap = document.createElement("div"); wrap.className = "input-wrap";
+  inp.parentNode.insertBefore(wrap, inp); wrap.appendChild(inp);
+  const x = document.createElement("button"); x.type = "button"; x.className = "clear-x"; x.textContent = "✕"; wrap.appendChild(x);
+  x.addEventListener("click", () => { inp.value = ""; inp.dispatchEvent(new Event("input")); inp.focus(); });
+});
+
+[txModal, methodModal, repeatModal, targetModal, catModal, assetModal, aentryModal, confirmModal, wheelModal, searchModal].forEach(m => m.addEventListener("click", e => { if (e.target === m) m.classList.remove("open"); }));
 
 // ---------- Firebase 동기화 ----------
 function schedulePush() {
