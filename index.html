@@ -152,10 +152,12 @@
   .type-toggle button.act-exp { background: var(--expense); color: #fff; border-color: var(--expense); }
   .type-toggle button.act-inc { background: var(--income); color: #fff; border-color: var(--income); }
   .type-toggle button.on { background: var(--primary); color: #fff; border-color: var(--primary); }
-  .cat-pick { display: flex; flex-wrap: wrap; gap: 8px; }
-  .cat-pick .opt { padding: 8px 12px; border-radius: 20px; border: 1px solid var(--border);
-    background: var(--surface); color: var(--text); font-size: 13px; cursor: pointer; display: flex; align-items: center; gap: 5px; }
-  .cat-pick .opt.sel { color: #fff; }
+  .cat-pick { display: grid; grid-template-columns: repeat(auto-fill, minmax(56px, 1fr)); gap: 12px 4px; }
+  .cat-item { border: none; background: none; cursor: pointer; padding: 0; display: flex; flex-direction: column; align-items: center; gap: 5px; }
+  .cat-circle { width: 46px; height: 46px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 22px; flex-shrink: 0; }
+  .cat-name { font-size: 11px; color: var(--text); text-align: center; line-height: 1.15; word-break: keep-all; }
+  .cat-item.sel .cat-circle { box-shadow: 0 0 0 3px var(--surface), 0 0 0 5px var(--primary); }
+  .cat-item.sel .cat-name { font-weight: 700; color: var(--primary); }
   .emoji-pick, .color-pick { display: flex; flex-wrap: wrap; gap: 8px; }
   .emoji-pick .e { width: 40px; height: 40px; border-radius: 50%; border: 1px solid var(--border); background: var(--surface-2);
     font-size: 20px; cursor: pointer; display: flex; align-items: center; justify-content: center; }
@@ -279,35 +281,32 @@
 
   <!-- 카테고리 추가 -->
   <div class="overlay" id="cat-modal"><div class="sheet">
-    <h2 id="cat-modal-title">카테고리 추가</h2>
+    <div class="sheet-head"><h2 id="cat-modal-title">카테고리 추가</h2><button id="c-cancel" class="sheet-x">✕</button></div>
     <div class="field"><div class="type-toggle"><button id="c-expense">지출</button><button id="c-income">수입</button></div></div>
     <div class="field"><label>이름</label><input type="text" id="c-name" placeholder="예: 카페" /></div>
     <div class="field" id="c-transfer-field"><label class="check-row"><input type="checkbox" id="c-transfer" /> 저축·이체용 (지출에 안 잡히고 자산으로 이동)</label></div>
     <div class="field"><label>아이콘</label><div class="emoji-pick" id="c-emojis"></div></div>
     <div class="field"><label>색상</label><div class="color-pick" id="c-colors"></div></div>
     <button class="btn-primary" id="c-save">추가</button>
-    <button class="btn-ghost" id="c-cancel">취소</button>
   </div></div>
 
   <!-- 자산 수정 -->
   <div class="overlay" id="asset-modal"><div class="sheet">
-    <h2 id="asset-modal-title">자산 수정</h2>
+    <div class="sheet-head"><h2 id="asset-modal-title">자산 수정</h2><button id="a-cancel" class="sheet-x">✕</button></div>
     <div class="field"><label>이름</label><input type="text" id="a-name" placeholder="예: 비상금" /></div>
     <div class="field"><label>아이콘</label><div class="emoji-pick" id="a-emojis"></div></div>
     <button class="btn-primary" id="a-save">저장</button>
     <button class="btn-ghost danger" id="a-delete">삭제</button>
-    <button class="btn-ghost" id="a-cancel">취소</button>
   </div></div>
 
   <!-- 자산 입력(입금/출금) -->
   <div class="overlay" id="aentry-modal"><div class="sheet">
-    <h2 id="aentry-title">입력</h2>
+    <div class="sheet-head"><h2 id="aentry-title">입력</h2><button id="ae-cancel" class="sheet-x">✕</button></div>
     <div class="field"><div class="type-toggle"><button id="ae-in">입금 (+)</button><button id="ae-out">출금 (−)</button></div></div>
     <div class="field"><label>금액</label><input type="number" id="ae-amount" inputmode="numeric" placeholder="0" /></div>
     <div class="field"><label>날짜</label><input type="date" id="ae-date" /></div>
     <div class="field"><label>메모 (선택)</label><input type="text" id="ae-memo" placeholder="예: 이자" /></div>
     <button class="btn-primary" id="ae-save">저장</button>
-    <button class="btn-ghost" id="ae-cancel">취소</button>
   </div></div>
 
 <script>
@@ -942,13 +941,17 @@ function renderTxForm() {
   const box = $("f-cats");
   box.innerHTML = cats.filter(c => c.type === state.form.type).map(c => {
     const sel = c.id === state.form.categoryId;
-    return `<button class="opt ${sel?'sel':''}" data-pick="${c.id}" style="${sel?`background:${c.color};border-color:${c.color}`:''}">${c.emoji} ${esc(c.name)}</button>`;
+    return `<button class="cat-item ${sel?'sel':''}" data-pick="${c.id}">
+      <span class="cat-circle" style="background:${c.color}">${c.emoji}</span>
+      <span class="cat-name">${esc(c.name)}</span></button>`;
   }).join("");
   box.querySelectorAll("[data-pick]").forEach(b => b.addEventListener("click", () => pickCategory(b.dataset.pick)));
   const tbox = $("f-targets");
   tbox.innerHTML = assets.filter(a => !a.cash).map(a => {
     const sel = a.id === state.form.targetAssetId;
-    return `<button class="opt ${sel?'sel':''}" data-target="${a.id}" style="${sel?'background:var(--primary);border-color:var(--primary)':''}">${a.emoji} ${esc(a.name)}</button>`;
+    return `<button class="cat-item ${sel?'sel':''}" data-target="${a.id}">
+      <span class="cat-circle" style="background:var(--savings)">${a.emoji}</span>
+      <span class="cat-name">${esc(a.name)}</span></button>`;
   }).join("");
   tbox.querySelectorAll("[data-target]").forEach(b => b.addEventListener("click", () => pickTarget(b.dataset.target)));
   updateTxCond();
